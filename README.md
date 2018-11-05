@@ -4,7 +4,7 @@ AleksZimin Infra repository
 ## HW-4
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=cloud-testapp)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
 
-###Дополнительное задание:
+### Дополнительное задание:
 #### Создаем инстанс (загрузка startup скрипта из локального файла)
 ```
 gcloud compute instances create reddit-app\
@@ -56,17 +56,17 @@ testapp_port = 9292
 
 ## HW-3
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=cloud-bastion)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
-###Подключение к хосту someinternalhost в одну строку.
-####Проверяем, запущен ли агент авторизации, если нет, то запускаем его. Далее добавляем приватный ключ в ssh агент авторизации и подключаемся по ssh к someinternalhost через bastion.
+### Подключение к хосту someinternalhost в одну строку.
+#### Проверяем, запущен ли агент авторизации, если нет, то запускаем его. Далее добавляем приватный ключ в ssh агент авторизации и подключаемся по ssh к someinternalhost через bastion.
 ```
 ssh-add -L >> /dev/null || eval `ssh-agent -s` && ssh-add ~/.ssh/GCP_zav.edu.devops@gmail.com && ssh -t -A GCP_zav.edu.devops@35.210.36.229 ssh 10.132.0.3
 ```
-###Дополнительное задание:
-####Создать алиас в  ~/.ssh/config:
+### Дополнительное задание:
+#### Создать алиас в  ~/.ssh/config:
 ```
 vim ~/.ssh/config
 ```
-####Добавить в конец файла настройки для  хоста someinternalhost:
+#### Добавить в конец файла настройки для  хоста someinternalhost:
 ```
 Host someinternalhost
      User GCP_zav.edu.devops
@@ -74,7 +74,7 @@ Host someinternalhost
      ProxyCommand ssh -i ~/.ssh/GCP_zav.edu.devops@gmail.com -W %h:%p GCP_zav.edu.devops@35.210.36.229
      IdentityFile ~/.ssh/GCP_zav.edu.devops@gmail.com
 ```
-####Подключаться командой:
+#### Подключаться командой:
 ```
 ssh someinternalhost
 ```
