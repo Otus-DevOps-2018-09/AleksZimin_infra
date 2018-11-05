@@ -5,7 +5,7 @@ my_script_path="$(dirname "$(readlink -f "$0")")"
 my_script_name="$(basename "$(readlink -f "$0")")"
 my_log_path=${my_script_path}/logs/"$my_script_name"_${my_date}_${my_time}
 my_reddit_folder="/etc/reddit/"
-my_user="GCP_zav.edu.devops"
+#my_user="GCP_zav.edu.devops"
 #============================================ Do not edit below ============================================#
 #Funcions:
 my_func_Get_Reddit() {
@@ -13,7 +13,8 @@ my_func_Get_Reddit() {
   git clone -b monolith https://github.com/express42/reddit.git "$my_reddit_folder"
   cd "$my_reddit_folder"
   echo "$(date +%H-%M-%S): bundle install"
-  sudo su "$my_user" -c bundle install
+  #sudo su "$my_user" -c bundle install
+  bundle install
   echo "$(date +%H-%M-%S): Start puma process"
   puma -d
 }
