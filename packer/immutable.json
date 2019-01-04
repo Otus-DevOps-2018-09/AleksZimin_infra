@@ -14,8 +14,6 @@
         "home_folder": "{{env `HOME`}}",
         "default_config": null
         },
-    "sensitive-variables": ["project_id", "source_image_family", "ssh_username", "default_config"],
-
     "builders": [
         {
             "type": "googlecompute",

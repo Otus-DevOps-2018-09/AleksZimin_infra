@@ -12,8 +12,6 @@
         "network":"default",
         "network_tags": "puma-server"
         },
-    "sensitive-variables": ["project_id", "source_image_family", "ssh_username"],
-
     "builders": [
         {
             "type": "googlecompute",
