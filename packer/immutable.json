@@ -2,17 +2,19 @@
     "variables": {
         "project_id": null,
         "source_image_family": null,
-        "image_family":"reddit-base",
+        "image_family":"reddit-full",
         "zone": "europe-west1-b", 
         "ssh_username":null,       
         "machine_type": "f1-micro",
         "disk_size": "10",
         "disk_type": "pd-standard",
-        "image_description": "ZAV images for test reddit application",
+        "image_description": "ZAV image with full reddit application",
         "network":"default",
-        "network_tags": "puma-server"
+        "network_tags": "puma-server",
+        "home_folder": "{{env `HOME`}}",
+        "default_config": null
         },
-    "sensitive-variables": ["project_id", "source_image_family", "ssh_username"],
+    "sensitive-variables": ["project_id", "source_image_family", "ssh_username", "default_config"],
 
     "builders": [
         {
@@ -33,14 +35,22 @@
     ],
 	    "provisioners": [
         {
-            "type": "shell",
-            "script": "scripts/install_ruby.sh",
-            "execute_command": "sudo {{.Path}}"
+          "type": "shell",
+          "inline": "mkdir -p $(dirname /tmp/{{ user `default_config` }})"
         },
+        {
+          "type": "file",
+          "source": "files/{{ user `default_config` }}",
+          "destination": "/tmp/{{ user `default_config` }}"
+        },    
 		    {
-            "type": "shell",
-            "script": "scripts/install_mongodb.sh",
-            "execute_command": "sudo {{.Path}}"
+          "type": "shell",
+          "environment_vars": [
+            "my_log_path=/var/log/reddit_deploy_log_{{isotime \"2006-01-02_15-04-05\"}}",
+            "default_service_conf=/tmp/{{ user `default_config` }}"
+          ],
+          "script": "scripts/deploy.sh",
+          "execute_command": "sudo {{ .Vars }} {{.Path}}"
         }
     ]
 }

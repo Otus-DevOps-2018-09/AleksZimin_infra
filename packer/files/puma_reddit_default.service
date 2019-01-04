@@ -1,0 +1,17 @@
+[Unit]
+Description=My Puma Service for Reddit app
+After=network.target
+
+[Service]
+#Type=simple
+Type=forking
+PIDFile=replace_this_app_folder/tmp/puma.pid
+
+WorkingDirectory=replace_this_app_folder
+ExecStart=replace_this_bin_folder/puma -d --pidfile replace_this_app_folder/tmp/puma.pid
+Restart=always
+User=replace_this_user
+Group=replace_this_group
+
+[Install]
+WantedBy=multi-user.target
