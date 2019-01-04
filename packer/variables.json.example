@@ -3,5 +3,4 @@
     "source_image_family": "example-image",
     "ssh_username":"example-user",
     "default_config": "puma_reddit_default.service"
-}   
-    
+}
