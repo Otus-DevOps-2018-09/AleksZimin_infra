@@ -7,7 +7,7 @@ my_script_name="$(basename "$(readlink -f "$0")")"
 my_log_path="${my_script_path}/logs/${my_script_name}_${my_date}_${my_time}"
 
 #============================================ Do not edit below ============================================#
-if [ "$1" = "enable_logging" ]; then
+if [ "$1" = "-enable_logging" ]; then
   mkdir -p "$(dirname "$my_log_path")"
   exec >"$my_log_path" 2>&1
   echo "$(date +%H-%M-%S): Use exec for redirection stdout and stderr in $my_log_path"

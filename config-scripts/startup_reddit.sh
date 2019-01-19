@@ -3,9 +3,12 @@ my_date=$(date +%Y-%m-%d)
 my_time=$(date +%H-%M-%S)
 my_script_name="start_reddit"
 my_startup_scripts_folder=/startup_scripts/
-my_log_path="/${my_startup_scripts_folder}/logs/${my_script_name}_${my_date}_${my_time}"
+my_log_path="${my_startup_scripts_folder}/logs/${my_script_name}_${my_date}_${my_time}"
 my_executing_script_lst="install_ruby.sh install_mongodb.sh deploy.sh"
+#Задаем переменные, которые будут экспортированы в вызываемые скрипты (экспортируемые переменные указывать в блоке между set -a и set +a)
+set -a
 my_backet_name="infra_scripts"
+set +a
 my_package="wget"
 my_git_link="https://raw.githubusercontent.com/Otus-DevOps-2018-09/AleksZimin_infra/cloud-testapp/"
 #============================================ Do not edit below ============================================#
@@ -35,10 +38,11 @@ my_func_Download_GS () {
 }
 
 #script:
+exec >"$my_log_path" 2>&1
 mkdir -p "$(dirname "$my_log_path")"
-:>"$my_log_path"
+#:>"$my_log_path"
 
-{ 
+##{ 
 echo "$(date +%H-%M-%S): Running $my_script_name script."
 echo "$(date +%H-%M-%S): Path to log file: $my_log_path"  
 for my_executing_script in $my_executing_script_lst
@@ -48,11 +52,11 @@ do
   echo "$(date +%H-%M-%S): Set the rights for downloaded script"
   chmod +x "${my_startup_scripts_folder}/$my_executing_script"
   echo "$(date +%H-%M-%S): Start $my_executing_script script"
-  sh "${my_startup_scripts_folder}/$my_executing_script"
+  sh "${my_startup_scripts_folder}/$my_executing_script" -enable_logging
   echo
 done
 echo "$(date +%H-%M-%S): End of $my_script_name script. Exit."
-} >>"$my_log_path" 2>&1
+#} >>"$my_log_path" 2>&1
 
 
 exit

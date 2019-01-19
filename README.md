@@ -1,6 +1,25 @@
 # AleksZimin_infra
 AleksZimin Infra repository
 
+## HW-5
+[![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=packer-base)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
+
+### Основное задание:
+* Создал параметризированный шаблон ubuntu16.json для packer в соответствии с заданием (создается образ reddit-base с предустановленными ruby и mongodb)
+* Создал отдельный файл variables.json(в репо отсутствует-вместо него variables.json.example), в котором определил обязательные переменные
+
+### Дополнительное задание:
+* Создал шаблон immutable.json для packer (из образа, созданного в основном задании, создается образ reddit-full с готовым приложением)
+* Дефолтный конфигурационный файл для службы лежит в каталоге packer/files
+* В каталоге config-scripts создал скрипт create-reddit-vm.sh для создания ВМ на основе образа reddit-full
+
+#### Для проверки корректности шаблонов использовать команды:
+```
+packer validate -var-file=variables.json.example ubuntu16.json
+packer validate -var-file=variables.json.example immutable.json
+``` 
+
+
 ## HW-4
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=cloud-testapp)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
 
@@ -23,8 +42,9 @@ gsutil mb -p infra-220012 -c regional -l europe-west1 gs://infra_scripts/
 ```
 
 #### Копируем скрипты в bucket:
-cd ~/REPO/AleksZimin_infra
+```
 gsutil -m cp *.sh gs://infra_scripts/
+```
 
 #### Создаем инстанс (загрузка startup скрипта по URL)
 ```
