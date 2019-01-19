@@ -30,12 +30,6 @@ terraform fmt -write=true
 * Изменил файлы lb.tf и main.tf, чтобы кол-во инстансов задавать через параметр ресурса count.
 * Переменная count задается в файле variables.tf и по-умолчанию равна 1  
 
-#### Для проверки корректности шаблонов использовать команды:
-```
-packer validate -var-file=variables.json.example ubuntu16.json
-packer validate -var-file=variables.json.example immutable.json
-```
-
 ## HW-5
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=packer-base)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
 
