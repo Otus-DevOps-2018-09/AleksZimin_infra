@@ -1,6 +1,41 @@
 # AleksZimin_infra
 AleksZimin Infra repository
 
+## HW-6
+[![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=terraform-1)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
+
+### Основное задание:
+* Установил terraform на ВМ с ОС ubuntu 1604
+* Создал конфигурационные файлы terrraform
+* Определил input переменную для приватного ключа и зоны (для зоны указано значение по умолчанию)
+* Определил output переменную с внешним IP созданной виртуальной машины (использовал outputs.tf)
+* Отформатировал все конфигурационные файлы с помощью команды
+```
+terraform fmt -write=true
+```
+* Создал файл terraform.tfvars.example, в котором указал переменные для образца
+
+### Дополнительное задание 1:
+* Добавил ssh ключ одного пользователя в метаданные проекта, используя google_compute_project_metadata_item 
+* Добавил ssh ключ нескольких полльзователей в метаданные проекта , используя google_compute_project_metadata
+* Добавил ssh ключ пользователя appuser_web в метаданные проекта через web интерфейс. Данный ключ был удален после выполнения команды terraform apply
+
+### Дополнительное задание 2:
+* Создал файл конфигурации lb.tf для создания http балансировщика. 
+* Добавил в output переменные адрес балансировщика (balance_external_ip).
+* Добавил еще один terraform ресурс для нового инстанса приложения, reddit-app2.
+* Добавил новый инстанс в балансировщик.
+* Остановил приложение на одном из инстансов. Приложение все равно было доступно.
+* Проблемы, которые я вижу в такой конфигурации: у приложений разные базы данных, поэтому при переключении между инстансами мы видим разные посты. Необходима единая БД
+* Изменил файлы lb.tf и main.tf, чтобы кол-во инстансов задавать через параметр ресурса count.
+* Переменная count задается в файле variables.tf и по-умолчанию равна 1  
+
+#### Для проверки корректности шаблонов использовать команды:
+```
+packer validate -var-file=variables.json.example ubuntu16.json
+packer validate -var-file=variables.json.example immutable.json
+```
+
 ## HW-5
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=packer-base)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
 

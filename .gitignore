@@ -1,2 +1,7 @@
 /packer/variables.json
 /packer/variables_immutable.json
+*.tfstate
+*.tfstate.*.backup
+*.tfstate.backup
+*.tfvars
+.terraform/
