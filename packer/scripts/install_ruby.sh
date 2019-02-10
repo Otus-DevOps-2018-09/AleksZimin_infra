@@ -14,8 +14,7 @@ if [ "$1" = "-enable_logging" ]; then
 fi
 
 echo "$(date +%H-%M-%S): Running $my_script_name script."
-echo "$(date +%H-%M-%S): Check the last time apt update was execute"
-[ -z "$(find -H /var/lib/apt/periodic/update-success-stamp -maxdepth 0 -mtime -1)" ] && apt-get update || echo "$(date +%H-%M-%S): Skip apt-get update because it was run less than 1 day ago"
+apt-get update
 echo "$(date +%H-%M-%S): Starting packages installation. The following packages will be installed: $my_packages_lst";echo
 
 for my_package in $my_packages_lst

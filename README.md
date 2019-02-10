@@ -1,6 +1,33 @@
 # AleksZimin_infra
 AleksZimin Infra repository
 
+## HW-7
+[![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=terraform-2)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
+
+### Основное задание:
+* Определил ресурс файервола и импортировал существующую инфраструктуру в Terraform.
+* Сделал шаблоны для packer db.json и app.json, на основе которых создал базовые образы reddit-db-base и reddit-app-base.
+* Сделал модули app, db, vpc.
+* Параметризировал модуль vpc и проверил его работу с разными ip адресами.
+* Отформатировал конфигурационные файлы, используя команду `terraform fmt`.
+* Использовал модуль storage-bucket от SweetOPS для создания бакетов, в которых будут храниться стейт файлы stage и prod окружений
+
+### Дополнительное задание 1:
+* Настроил хранение стейт файла в удаленном бекенде(gcp) для окружений stage и prod
+* Убедился, что terraform видит текущую конфигурацию, не имея локального state файла
+* При одновременном применении конфигурации из разных терминалов и разных каталогов получаем ошибку Error locking state
+
+### Дополнительное задание 2:
+#### В модуле app:
+* Добавил provisioner "file" для копирования конфига сервиса и "remote-exec" для выполнения скрипта deploy.sh в модуле app
+* Добавил data sources для подстановки в конфиг сервиса внутреннего ip адреса mongodb
+* Перенес необходимые файлы в каталог files в директории модуля
+#### В модуле db:
+* Добавил provisioner "remote-exec" для изменения bindIp в конфиге mongodb
+* Добавил в выходные переменные внутренний ip адрес mongodb
+#### В main.tf добавил переменную с внутренним ip адресом mongodb в передаваемые параметры для модуля app 
+
+
 ## HW-6
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=terraform-1)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
 
