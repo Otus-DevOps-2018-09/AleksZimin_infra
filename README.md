@@ -1,6 +1,24 @@
 # AleksZimin_infra
 AleksZimin Infra repository
 
+
+## HW-9
+[![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=ansible-2)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
+
+### Основное задание:
+* Закомментировал код провижинга в модулях app и db терраформа.
+* Создал плейбук с одним сценарием. Проверил его работу.
+* Создал плейбук с несколькими сценариями. 
+* Самостоятельно добавил сценарий для деплоя приложения. 
+* Проверил работу плейбука с несколькими сценариями.
+* Создал несколько плейбуков и проверил их работу.
+* Создал плейбуки для замены bash скриптов в провижининге packer.
+* Изменил провижининг в packer на ansible плейбуки.
+* Создал новые образы с использованием нового провижинера.
+* На основе созданных app и db образов запустил stage окружение.
+* Проверил работу плейбука site.yml. 
+
+
 ## HW-8
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=ansible-1)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
 
