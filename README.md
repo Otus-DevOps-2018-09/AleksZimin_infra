@@ -1,6 +1,27 @@
 # AleksZimin_infra
 AleksZimin Infra repository
 
+## HW-8
+[![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=ansible-1)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
+
+### Основное задание:
+* Установил pip и ansible.
+* Заполнил инвентори в формате ini.
+* Перевел инвентори в формат YAML.
+* Сравнил команды shell и command; command,service,systemd, command,git.
+* Создал первый плейбук. Запустил его повторно после выполнения команды
+```
+ ansible app -m command -a 'rm -rf ~/reddit'
+```
+
+Изменился вывод ansible:
+```
+appserver                  : ok=2    changed=1    unreachable=0    failed=0
+```
+
+Произошло это из за того, что предыдущей командой мы удалили каталог с клонированным репо. Плейбук внес изменения, склонировав данную папку. В первый запуск плейбука данный каталог уже существовал, поэтому изменения на хосте не произошли.
+
+
 ## HW-7
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=terraform-2)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
 
