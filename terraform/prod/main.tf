@@ -22,7 +22,7 @@ module "db" {
 
 module "vpc" {
   source        = "../modules/vpc"
-  source_ranges = ["178.66.18.87/32"]
+  source_ranges = ["91.122.142.136/32"]
 }
 
 # Ресурсы google_compute_project_metadata и google_compute_project_metadata_item перезаписывают указанные метаданные проекта.

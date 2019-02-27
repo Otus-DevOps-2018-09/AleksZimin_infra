@@ -1,6 +1,36 @@
 # AleksZimin_infra
 AleksZimin Infra repository
 
+## HW-10
+[![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=ansible-3)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
+
+### Основное задание:
+* Создал роли app и db.
+* Проверил работу ролей.
+* Настроил работу для нескольких окружений (stage и prod).
+* Настроил вывод информации об окружении, в котором находится конфигурируемый хост.
+* Перенес все плейбуки в директорию ansible/playbooks.
+* Внес новые пути к плейбукам в шаблонах app и db, используемые Packer.
+* Проверил шаблоны app и db, используемые Packer:
+```
+packer validate -var-file=packer/variables.json packer/app.json
+packer validate -var-file=packer/variables.json packer/db.json
+```
+* Перенес файлы, не относящиеся к текущей конфигурации, в директорию ansible/old.
+* Улучшил файл ansible.cfg
+* Проверил работу ролей с окружениями (настроил stage и prod окружения)
+* Установил и настроил community-роль jdauphant.nginx для проксирования запросов с 80 порта на порт приложения
+* Добавил в конфигурацию terraform открытие 80 порта для инстанса приложения
+* Добавил вызов роли jdauphant.nginx в плейбук app.yml
+* Пересоздал ресурсы терраформа для stage окружения
+* Применил плейбук site.yml для окружения stage и проверил, что приложение теперь доступно на 80 порту
+* Создал файл vault.key вне репозитория и записал в него строку ключа
+```
+openssl rand 258 | openssl enc -A -base64 > ~/.ansible/vault.key
+```
+* Создал плейбук users.yml. Зашифровал файл credentials.yml
+* Добавил вызов плейбука users.yml в site.yml. Выполнил  site.yml для stage окружения
+* Включил парольную аутентификацию и зашел на инстансы под созданными пользователями. 
 
 ## HW-9
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=ansible-2)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
