@@ -1,6 +1,54 @@
 # AleksZimin_infra
 AleksZimin Infra repository
 
+## HW-11
+[![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=ansible-4)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
+
+### Основное задание:
+* Создал виртуалку в гипервизоре, поддерживающем nested virtualisation (я использовал kvm).
+* На данной ВМ установил virtualbox 5.2 и vagrant 2.2.3.
+* Склонировал на новую ВМ мой репозиторий и скопировал файл vault.key.
+* Создал Vagrantfile.
+* Создал виртуалки, описанные в Vagrantfile. Проверил их работоспособность и связь друг с другом.
+* Создал плейбук base.yml в котором описал установку python. Добавил данный плейбук в site.yml.
+* Убрал плейбук users.yml из site.yml.
+* Изменил роль db: создал файл тасков install_mongo.yml, вынес таски управления конфигом mongodb в отдельный файл config_mongo.yml, изменил main.yml.
+* Выполнил провижининг локальной машины dbserver. 
+* Проверил доступность порта монги для хоста appserver.
+* Изменил роль app: создал файл тасков ruby.yml, вынес таски настройки puma сервера в puma.yml, изменил main.yml.
+* Определил ansible провижинер для хоста appserver в Vagrantfile.
+* Применил провижининг для хоста appserver
+* Параметризировал имя пользователя в роли app и в плейбуке deploy.yml
+* Добавил extra_vars переменные в блок определения провижинера в Vagrantfile. Определил там "deploy_user" => "vagrant", т.к. vagrant выполняет плейбуки от этого пользователя
+* Проверил корректность создания ВМ и деплоя приложения с нуля
+* Для запуска приложения по адресу http://10.10.10.20 необходимо добавить в Vagrantfile extra_var:
+```
+"nginx_sites" => { "default" => [
+          "listen 80",
+          "server_name 'reddit'",
+          "location / { proxy_pass http://127.0.0.1:9292;}"]}
+```
+
+* Установил virtualenv virtualenvwrapper для работы в виртуальном окружении
+* Создал виртуальное окружение venv.
+* Добавил директорию venv в .gitignore
+* Добавил в файл requirements.txt новые записи
+* Установил molecule, testinfra, python-vagrant
+* Внутри роли db инициализировал тестовую инфраструктуру molecule.
+* Добавил тесты для molecule в тестовом фреймворке testinfra.
+* Создал тестовую машину для проверки роли
+* Внес изменения в db/molecule/default/playbook.yml
+* Самостоятельно дописал один тест на прослушивание порта монги(27017).
+* Использовал роли db и app в плейбуках packer_db.yml и packer_app.yml, изменил шаблоны пакера
+* Проверил шаблоны пакера
+```
+packer validate -var-file=packer/variables.json packer/app.json
+packer validate -var-file=packer/variables.json packer/db.json
+
+packer build -var-file=packer/variables.json packer/app.json
+packer build -var-file=packer/variables.json packer/db.json
+```
+
 ## HW-10
 [![Build Status](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra.svg?branch=ansible-3)](https://travis-ci.com/Otus-DevOps-2018-09/AleksZimin_infra)
 
